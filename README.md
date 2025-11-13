@@ -10,11 +10,14 @@ First, we fetch daily OHLCV BTCUSD data using yfinance. The timespan should be s
 
 Then we QQ-plot the daily returns against the fitted composite distribution, to validate that it is a good fit. MAE, RMSE and R^2 also helps explain this. 
 
+<img width="514" height="765" alt="comp_fit_ex" src="https://github.com/user-attachments/assets/2b3c87b6-2eac-4e02-a1cf-1e4049b78472" />
+
 Below that, we impose a portfolio CVaR target (1d: -2%, 7d: -5%, 30d: 10% - just an example, horizon and CVaR values easily changed in the code) and obtain BTC return CVaR values from Monte-Carlo simulations to calculate the optimal weights w' for BTC ((1-w') in cash) s.t. the portfolio CVaR target is satisfied for each horizon and CVaR target respectively. 
+
 <img width="929" height="506" alt="opt_alloc_sum_ex" src="https://github.com/user-attachments/assets/5525fe7f-1ec6-4914-94e0-134ec0a49dc7" />
 
 
 ## Explanation of the CVaR allocation rule
-As a risk-allocator, we are aware that BTC returns have fat left tails and negative skew; thus from a compounding perspective avoiding especially severe one-day (or shorter period for that matter) drawdowns is of great importance. Thus we come up with a simple rule: we calculate rolling (365d window) next-day CVaR at 5% level for BTC returns, and using this, determine the weight w' to allocate in BTC such that the next-day ***portfolio CVaR*** is no greater than 2%. The signal then rebalances daily with a new value w'.
+As a risk-allocator, we are aware that BTC returns have fat left tails and negative skew; thus from a compounding perspective avoiding especially severe one-day (or shorter period for that matter) drawdowns is of great importance. We then use the same idea as above to find our BTC and cash allocations: we calculate *rolling* (365d window) next-day CVaR at 5% level for BTC returns, and using this, determine the weight w' to allocate in BTC such that the next-day ***portfolio CVaR*** is no greater than 2%. The signal then rebalances daily with a new value w'.
 
 <img width="1789" height="1376" alt="a4596e3c-d868-42d0-b882-8778d7b583bf" src="https://github.com/user-attachments/assets/d2bd8f2e-c878-42f2-b792-e573d78f2e4d" />
