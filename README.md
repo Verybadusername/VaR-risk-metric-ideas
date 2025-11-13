@@ -21,3 +21,5 @@ Below that, we impose a portfolio CVaR target (1d: -2%, 7d: -5%, 30d: 10% - just
 As a risk-allocator, we are aware that BTC returns have fat left tails and negative skew; thus from a compounding perspective avoiding especially severe one-day (or shorter period for that matter) drawdowns is of great importance. We then use the same idea as above to find our BTC and cash allocations: we calculate *rolling* (365d window) next-day CVaR at 5% level for BTC returns, and using this, determine the weight w' to allocate in BTC such that the next-day ***portfolio CVaR*** is no greater than 2%. The signal then rebalances daily with a new value w'.
 
 <img width="1789" height="1376" alt="a4596e3c-d868-42d0-b882-8778d7b583bf" src="https://github.com/user-attachments/assets/d2bd8f2e-c878-42f2-b792-e573d78f2e4d" />
+
+<img width="633" height="569" alt="cvar_portf" src="https://github.com/user-attachments/assets/a21e421e-cbb8-4eaa-8985-8991be34dfb1" />
